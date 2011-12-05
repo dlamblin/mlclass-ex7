@@ -21,14 +21,27 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-for x=1:rows(X),
-  [mag, idx(x)] = min(
-    norm(
-      (ones(K,1) * X(x,:)) - centroids,
-      1, 'rows'
-    )
-  );
-end
+% Works in Octave.... can't we all agree on using the SAME DAMN TOOL
+% fuck the image package and the rgb scatter plot error. That was not worked
+% out or around. Even though you said you did.
+% that cost me 4 of the 5 hours I had set aside to actually do this crap.
+% the forums are still a horrible mess, I'd be totally and solely lucky if I
+% found the right information there.
+%for x=1:rows(X),
+%  [mag, idx(x)] = min(
+%    norm(
+%      (ones(K,1) * X(x,:)) - centroids,
+%      1, 'rows'
+%    )
+%  );
+%end
+for x = 1:rows(X),
+  Kx = (ones(K,1) * X(x,:));
+  vectDiff = Kx - centroids;
+  vectDiffSq = vectDiff .* vectDiff;
+  magnitudes = sum(vectDiffSq, 2);
+  [mag, idx(x)] = min( magnitudes );
+endfor
 
 % =============================================================
 
