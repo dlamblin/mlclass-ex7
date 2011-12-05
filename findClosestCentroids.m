@@ -21,11 +21,14 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
-
-
-
-
+for x=1:rows(X),
+  [mag, idx(x)] = min(
+    norm(
+      (ones(K,1) * X(x,:)) - centroids,
+      1, 'rows'
+    )
+  );
+end
 
 % =============================================================
 
